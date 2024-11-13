@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Music Player UI</title>
+  <!-- Google Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Comfortaa:wght@400&display=swap" rel="stylesheet">
+  <link href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" rel="stylesheet">
+  <style>
+    /* CSS styling */
+    body {
+      font-family: 'Comfortaa', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #1a1a1a;
+    }
+
+    .music-player {
+      width: 320px;
+      background-color: #2b2b2b; /* Matte black */
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      color: #ffffff;
+      text-align: center;
+      transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    /* Border blur hover effect */
+    .music-player:hover {
+      box-shadow: 0 4px 30px rgba(255, 255, 255, 0.3); /* Soft white glow */
+    }
+
+    .album-cover img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px 20px 0 0; /* Top rounded corners */
+      object-fit: cover;
+    }
+
+    .song-info {
+      text-align: left;
+      padding: 10px 0;
+    }
+
+    .song-info h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 2em;
+      margin: 0;
+      color: #ffffff;
+    }
+
+    .song-info p {
+      font-size: 1em;
+      margin: 5px 0;
+      color: #ffffff;
+    }
+
+    .progress-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 0;
+      color: #ffffff;
+    }
+
+    #progress-bar {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      background: #555; /* Dark background by default */
+      border-radius: 5px;
+      margin-bottom: 5px;
+      overflow: hidden;
+    }
+
+    /* Styles for the filled background */
+    #progress-bar::-webkit-slider-runnable-track {
+      height: 6px;
+      background: linear-gradient(to right, white 0%, white var(--progress), #555 var(--progress), #555 100%);
+    }
+
+    #progress-bar::-moz-range-track {
+      height: 6px;
+      background: linear-gradient(to right, white 0%, white var(--progress), #555 var(--progress), #555 100%);
+    }
+
+    #progress-bar::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ffffff;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+    }
+
+    #progress-bar::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .time-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 0.85em;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      font-size: 1.5em;
+      color: #ffffff;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #prev, #next {
+      font-size: 1.3em;
+      background-color: transparent;
+    }
+
+    #prev:hover, #next:hover {
+      background-color: rgba(169, 169, 169, 0.3); /* Light grey on hover */
+    }
+
+    #play-pause {
+      font-size: 1.8em; /* Larger play button */
+      background-color: rgba(169, 169, 169, 0.3);
+    }
+
+    #play-pause:hover {
+      color: #000; /* Black icon on hover for play button */
+    }
+
+    button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="music-player">
+    <div class="album-cover">
+      <!-- Placeholder for album cover image with frame -->
+      <img src="playerpic.jpg" alt="Album Cover">
+    </div>
+    <div class="song-info">
+      <h2>Thunder</h2>
+      <p>xam303</p>
+    </div>
+    <div class="progress-container">
+      <input type="range" id="progress-bar" value="0" max="100">
+      <div class="time-container">
+        <span id="current-time">0:00</span>
+        <span id="duration">3:30</span>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="prev"><i class="uil uil-step-backward"></i></button>
+      <button id="play-pause"><i class="uil uil-play-circle"></i></button>
+      <button id="next"><i class="uil uil-skip-forward"></i></button>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript to update the progress bar background dynamically
+    const progressBar = document.getElementById('progress-bar');
+
+    progressBar.addEventListener('input', (e) => {
+      const value = e.target.value;
+      progressBar.style.setProperty('--progress', value + '%');
+    });
+  </script>
+</body>
+</html>
